@@ -1,8 +1,10 @@
 import fs, { Stats } from "node:fs";
 
+const fsPromises = fs.promises;
+
 // file
 
-function access(filename: string): Promise<string|void> {
+export function access(filename: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.access(filename, (err) => {
             if (err) {
@@ -14,7 +16,7 @@ function access(filename: string): Promise<string|void> {
     });
 }
 
-function open(filename: string, type: string): Promise<string|number> {
+export function open(filename: string, type: string): Promise<string|number> {
     return new Promise((resolve, reject) => {
         fs.open(filename, type, (err, file) => {
             if (err) {
@@ -26,7 +28,7 @@ function open(filename: string, type: string): Promise<string|number> {
     });
 }
 
-function appendFile(filename: string, text: string): Promise<string|void> {
+export function appendFile(filename: string, text: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.appendFile(filename, text, (err) => {
             if (err) {
@@ -38,7 +40,7 @@ function appendFile(filename: string, text: string): Promise<string|void> {
     });
 }
 
-function readFile(filename: string, text: string): Promise<string> {
+export function readFile(filename: string, text: string): Promise<string> {
     return new Promise((resolve, reject) => {
         fs.readFile(filename, text, (err:string, data:string) => {
             if (err) {
@@ -50,7 +52,7 @@ function readFile(filename: string, text: string): Promise<string> {
     });
 }
 
-function writeFile(filename: string, text: string, encoding: string = 'utf-8'): Promise<string|void> {
+export function writeFile(filename: string, text: string, encoding: string = 'utf-8'): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.writeFile(filename, text, encoding, (err) => {
             if (err) {
@@ -62,7 +64,7 @@ function writeFile(filename: string, text: string, encoding: string = 'utf-8'): 
     });
 }
 
-function unlink(path: string): Promise<string|void> {
+export function unlink(path: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.unlink(path, (err) => {
             if (err) {
@@ -74,7 +76,7 @@ function unlink(path: string): Promise<string|void> {
     })
 }
 
-function rename(oldpath: string, newpath: string): Promise<string|void> {
+export function rename(oldpath: string, newpath: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.rename(oldpath, newpath, (err) => {
             if (err) {
@@ -86,7 +88,7 @@ function rename(oldpath: string, newpath: string): Promise<string|void> {
     })
 }
 
-function stat(path: string): Promise<string|Stats> {
+export function stat(path: string): Promise<string|Stats> {
     return new Promise((resolve, reject) => {
         fs.stat(path, (err, stat) => {
             if (err) {
@@ -98,7 +100,7 @@ function stat(path: string): Promise<string|Stats> {
     })
 }
 
-function lstat(path: string): Promise<string|Stats> {
+export function lstat(path: string): Promise<string|Stats> {
     return new Promise((resolve, reject) => {
         fs.lstat(path, (err, stat) => {
             if (err) {
@@ -110,7 +112,7 @@ function lstat(path: string): Promise<string|Stats> {
     })
 }
 
-function copyFile(src: string, dest: string): Promise<string|void> {
+export function copyFile(src: string, dest: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.copyFile(src, dest, (err) => {
             if (err) {
@@ -122,7 +124,7 @@ function copyFile(src: string, dest: string): Promise<string|void> {
     })
 }
 
-function link(path: string, newPath: string): Promise<string|void> {
+export function link(path: string, newPath: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.link(path, newPath, (err) => {
             if (err) {
@@ -134,7 +136,7 @@ function link(path: string, newPath: string): Promise<string|void> {
     })
 }
 
-function symlink(target: string, path: string, type: string = "file"): Promise<string|void>  {
+export function symlink(target: string, path: string, type: string = "file"): Promise<string|void>  {
     return new Promise((resolve, reject) => {
         fs.symlink(target, path, (err) => {
             if (err) {
@@ -146,7 +148,7 @@ function symlink(target: string, path: string, type: string = "file"): Promise<s
     })
 }
 
-function readlink(path: string): Promise<string> {
+export function readlink(path: string): Promise<string> {
     return new Promise((resolve, reject) => {
         fs.readlink(path, (err, linkString) => {
             if (err) {
@@ -160,7 +162,7 @@ function readlink(path: string): Promise<string> {
 
 // chmod chown
 
-function chmod(file: string, mode: number): Promise<string|void> {
+export function chmod(file: string, mode: number): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.chmod(file, mode, (err) => {
             if (err) {
@@ -172,7 +174,7 @@ function chmod(file: string, mode: number): Promise<string|void> {
     })
 }
 
-function chown(file: string, gid: number, uid: number): Promise<string|void> {
+export function chown(file: string, gid: number, uid: number): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.chown(file, gid, uid, (err) => {
             if (err) {
@@ -184,7 +186,7 @@ function chown(file: string, gid: number, uid: number): Promise<string|void> {
     })
 }
 
-function lchmod(file: string, mode: number): Promise<string|void> {
+export function lchmod(file: string, mode: number): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.lchmod(file, mode, (err) => {
             if (err) {
@@ -196,7 +198,7 @@ function lchmod(file: string, mode: number): Promise<string|void> {
     })
 }
 
-function lchown(file: string, gid: number, uid: number): Promise<string|void> {
+export function lchown(file: string, gid: number, uid: number): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.lchown(file, gid, uid, (err) => {
             if (err) {
@@ -210,7 +212,7 @@ function lchown(file: string, gid: number, uid: number): Promise<string|void> {
 
 // dir
 
-function rmdir(dir: string): Promise<string|void> {
+export function rmdir(dir: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.rmdir(dir, (err) => {
             if (err) {
@@ -222,7 +224,7 @@ function rmdir(dir: string): Promise<string|void> {
     })
 }
 
-function mkdir(dir: string): Promise<string|void> {
+export function mkdir(dir: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.mkdir(dir, (err) => {
             if (err) {
@@ -234,7 +236,7 @@ function mkdir(dir: string): Promise<string|void> {
     });
 }
 
-function mkdtemp(prefix: string): Promise<string|void> {
+export function mkdtemp(prefix: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.mkdtemp(prefix, (err) => {
             if (err) {
@@ -246,7 +248,7 @@ function mkdtemp(prefix: string): Promise<string|void> {
     });
 }
 
-function readDir(dir: string): Promise<string|string[]> {
+export function readDir(dir: string): Promise<string|string[]> {
     return new Promise((resolve, reject) => {
         fs.readdir(dir, (err, files) => {
             if (err) {
@@ -258,7 +260,7 @@ function readDir(dir: string): Promise<string|string[]> {
     })
 }
 
-function truncate(path: string): Promise<string|void> {
+export function truncate(path: string): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.truncate(path, (err) => {
             if (err) {
@@ -270,8 +272,7 @@ function truncate(path: string): Promise<string|void> {
     })
 }
 
-
-function utimes(path: string, atime: number, mtime: number): Promise<string|void> {
+export function utimes(path: string, atime: number, mtime: number): Promise<string|void> {
     return new Promise((resolve, reject) => {
         fs.utimes(path, atime, mtime, (err) => {
             if (err) {
@@ -283,26 +284,13 @@ function utimes(path: string, atime: number, mtime: number): Promise<string|void
     })
 }
 
-const start = performance.now();
+export async function getTime(fn: Function, ...args: any[]): Promise<number> {
+    const start = performance.now();
 
-stat("tmp_dir").then((files) => {
-    console.log(files);
-})
+    await fn(...args);
 
-const end = performance.now();
+    const end = performance.now();
+    const delta = end - start;
 
-const delta = end - start;
-
-console.log(delta);
-
-const start1 = performance.now();
-
-fs.promises.stat("tmp_dir").then((files) => {
-    console.log(files);
-})
-
-const end1 = performance.now();
-
-const delta1 = end1 - start1;
-
-console.log(delta1);
+    return delta;
+}
