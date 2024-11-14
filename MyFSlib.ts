@@ -284,7 +284,7 @@ export function utimes(path: string, atime: number, mtime: number): Promise<stri
     })
 }
 
-export async function getTime(fn: Function, ...args: any[]): Promise<number> {
+export async function getPerfomance(fn: Function, ...args: any[]): Promise<number> {
     const start = performance.now();
 
     await fn(...args);
