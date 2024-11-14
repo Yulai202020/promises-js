@@ -1,7 +1,20 @@
-import fs from "node:fs";
 import { getPerfomance } from "../MyFSlib";
+import fs from "node:fs";
 
 const fsPromises = fs.promises;
 
-const node_lib_time =  await getPerfomance(fsPromises.readFile, "tmp1.txt");
-console.log("node lib run time:",  node_lib_time);
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * max);
+}
+
+const name = getRandomInt(1000) + ".txt";
+
+fs.open( name, 'w', function (err, file) {
+    if (err) throw err;
+});
+
+const node_lib_time = await getPerfomance(fsPromises.readFile, name);
+
+console.log(node_lib_time)
+
+fs.unlink(name, () => {});
